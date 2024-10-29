@@ -2,6 +2,7 @@
 # Global options
 ################################################################################
 global:
+  imagePullSecrets: []
   image:
     # global image pull policy to use for all container images in the chart
     # can be overridden by individual image pullPolicy
