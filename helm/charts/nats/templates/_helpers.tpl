@@ -144,12 +144,13 @@ app.kubernetes.io/component: nats-box
 {{- end }}
 
 {{/*
-Print the image
+Override the nats.image template to use .global.imageRegistry instead of their
+.global.image.registry.
 */}}
 {{- define "nats.image" }}
 {{- $image := printf "%s:%s" .repository .tag }}
-{{- if or .registry .global.image.registry }}
-{{- $image = printf "%s/%s" (.registry | default .global.image.registry) $image }}
+{{- if or .registry .global.imageRegistry }}
+{{- $image = printf "%s/%s" (.registry | default .global.imageRegistry) $image }}
 {{- end -}}
 image: {{ $image }}
 {{- if or .pullPolicy .global.image.pullPolicy }}
